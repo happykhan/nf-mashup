@@ -36,7 +36,5 @@ workflow {
     // Running the MASH module
     SKETCHES = MASHSKETCH( FASTA )
     REFERENCE = MASHPASTE( SKETCHES.collect() )
-    SKETCHES.collect().view()
-    REFERENCE.view()
     DISTANCES = MASHDIST( REFERENCE, SKETCHES )
 }
