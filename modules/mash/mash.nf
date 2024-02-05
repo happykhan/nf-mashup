@@ -1,11 +1,7 @@
 process MASHSKETCH {
-    debug true
     label 'mash'
     time '1h'
     tag {"SKETCH $sample"}
-
-    publishDir "${params.output_dir}/mashsketch"
-
 
     input:
     tuple val(sample), file(fasta)
@@ -24,8 +20,32 @@ process MASHSKETCH {
 
 }
 
+process MASHTRIANGLE {
+    time '1h'
+    label 'mash'
+    tag {"MASHTRIANGLE"}
+
+    input:
+        path mash_files
+
+    script:
+        """
+        mash triangle -p ${task.cpus} $mash_files > triangle.txt 2> triangle.err
+        """
+    output:
+        path("triangle.txt")
+        path("triangle.err")
+
+    stub:
+        """
+        touch triangle.txt
+        touch triangle.err
+        """
+
+}
+
+
 process MASHPASTE {
-    debug true
     time '1h'
     label 'mash'
     tag {"MASHPASTE"}
@@ -60,8 +80,8 @@ process MASHDIST {
 
 
     input:
-    file fasta
     file reference
+    file fasta
 
     script:
     """

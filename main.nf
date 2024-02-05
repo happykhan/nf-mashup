@@ -3,7 +3,9 @@
 // Importing required functions from 'plugin/nf-validation'
 include { validateParameters; paramsHelp; paramsSummaryLog; } from 'plugin/nf-validation'
 
-include { MASHSKETCH; MASHPASTE; MASHDIST } from './modules/mash/mash'
+include { TRIANGLETOFULL } from './modules/base/base'
+include { MASHSKETCH; MASHPASTE; MASHDIST; MASHTRIANGLE } from './modules/mash/mash'
+include { RAPIDNJ } from './modules/rapidnj/rapidnj'
 
 // Setting the default value for params.help
 params.help = false
@@ -35,6 +37,11 @@ workflow {
 
     // Running the MASH module
     SKETCHES = MASHSKETCH( FASTA )
-    REFERENCE = MASHPASTE( SKETCHES.collect() )
-    DISTANCES = MASHDIST( REFERENCE, SKETCHES )
+    TRIANGLEFILE = MASHTRIANGLE( SKETCHES.collect() )  
+    PHYFILE = TRIANGLETOFULL( TRIANGLEFILE[0] )
+    RAPIDNJ( PHYFILE )
+    if ( params.reference ) {
+        REFERENCE = MASHPASTE( SKETCHES.collect() )  
+    }
+
 }
