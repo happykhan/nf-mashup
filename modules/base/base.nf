@@ -1,7 +1,7 @@
 process TRIANGLETOFULL {
-    time '1h'    
     tag {"Reticulating splines"}
-    publishDir "${params.output_dir}/triangletofull"
+    label 'process_low'
+    publishDir "${params.outdir}/triangletofull"
     
     input:
     path("triangle.txt")

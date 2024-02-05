@@ -14,15 +14,28 @@
       "type": "string",
       "description": "Prints help message"
     },
-    "output_dir": {
+    "outdir": {
       "type": "string",
-      "default": ".default_hidden",
-      "description": "Output directory"
+      "default": "/Users/nfareed/code/nf-mashup/outdir"
     },
-    "pipeline_info": {
+    "tracedir": {
       "type": "string",
-      "default": ".default_hidden/pipeline_info",
-      "description": "Location of pipeline info (trace, report)"
+      "default": "/Users/nfareed/code/nf-mashup/outdir/pipeline_info"
+    },
+    "reference": {
+      "type": "boolean"
+    },
+    "max_memory": {
+      "type": "string",
+      "default": "16.GB"
+    },
+    "max_cpus": {
+      "type": "integer",
+      "default": 8
+    },
+    "max_time": {
+      "type": "string",
+      "default": "10.h"
     }
   },
   "required": ["index"]

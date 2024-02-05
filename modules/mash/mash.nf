@@ -1,14 +1,14 @@
 process MASHSKETCH {
     label 'mash'
-    time '1h'
-    tag {"SKETCH $sample"}
+    label 'process_single'
+    tag {"Sketching $sample"}
 
     input:
     tuple val(sample), file(fasta)
 
     script:
     """
-    mash sketch $fasta -o ${sample}.msh
+    mash sketch -p ${task.cpus} $fasta -o ${sample}.msh
     """
     output:
     path "${sample}.msh"
@@ -21,9 +21,9 @@ process MASHSKETCH {
 }
 
 process MASHTRIANGLE {
-    time '1h'
     label 'mash'
-    tag {"MASHTRIANGLE"}
+    label 'process_medium'
+    tag {"Calculate distances"}
 
     input:
         path mash_files
@@ -46,11 +46,11 @@ process MASHTRIANGLE {
 
 
 process MASHPASTE {
-    time '1h'
     label 'mash'
+    label 'process_single'
     tag {"MASHPASTE"}
 
-    publishDir "${params.output_dir}/mashref"
+    publishDir "${params.outdir}/mashref"
 
     input:
         path mash_files
@@ -69,14 +69,12 @@ process MASHPASTE {
 
 }
 
-
 process MASHDIST {
-    debug true
-    time '1h'
     label 'mash'
+    label 'process_single'
     tag {"MASHDIST"}
     
-    publishDir "${params.output_dir}/mashdist"
+    publishDir "${params.outdir}/mashdist"
 
 
     input:

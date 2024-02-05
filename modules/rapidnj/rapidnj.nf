@@ -1,8 +1,9 @@
 process RAPIDNJ {
-    time '1h'
-    tag {"RAPIDNJ"}
+    label 'rapidnj'
+    label 'process_medium'
+    tag {"Building tree"}
 
-    publishDir "${params.output_dir}/tree"
+    publishDir "${params.outdir}/tree"
 
 
     input:
@@ -10,7 +11,7 @@ process RAPIDNJ {
 
     script:
     """
-    rapidnj -i pd dist_table.phy > tree.nwk
+    rapidnj --cores ${task.cpus} -i pd dist_table.phy > tree.nwk
     """
     output:
     path "tree.nwk"

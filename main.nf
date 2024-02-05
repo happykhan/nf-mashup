@@ -4,7 +4,7 @@
 include { validateParameters; paramsHelp; paramsSummaryLog; } from 'plugin/nf-validation'
 
 include { TRIANGLETOFULL } from './modules/base/base'
-include { MASHSKETCH; MASHPASTE; MASHDIST; MASHTRIANGLE } from './modules/mash/mash'
+include { MASHSKETCH; MASHPASTE; MASHTRIANGLE } from './modules/mash/mash'
 include { RAPIDNJ } from './modules/rapidnj/rapidnj'
 
 // Setting the default value for params.help
