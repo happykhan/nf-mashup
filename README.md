@@ -1,13 +1,14 @@
 # nf-mashup
 I dunno, something runs mash and makes NJ trees. 
 
-* runs mash sketch on different fasta files 
-* runs mash paste to merge these into a reference database
-* run mash dist using the individual sketches against the ref database to get distance values 
+* runs mash sketch on different fasta files. 
+* runs mash triangle to get pair-wise distances.
+* runs rapidnj to create NJ tree.
 
-## TODO: 
-* Create a distance matrix table 
-* Create an NJ tree using rapidnj
+OPTIONAL: 
+
+* runs mash paste to merge these into a reference database
+
 
 ## Installation
 
